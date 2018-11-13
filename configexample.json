@@ -1,0 +1,14 @@
+{
+    "token": "discord bot token id",
+    "ownerID": "discord developer id",
+    "response": {
+        "ayy": "lmao",
+        "ping": "pong!"
+    },
+    "hypixelkey": "hypixel api key",
+    "botname": "Test",
+    "mcuuid": "ur minecraft uuid",
+    "embedcolor": "0xFF6347",
+	"prefix": ".",
+    "urlshortapikey": "googl shortener api key"
+}
