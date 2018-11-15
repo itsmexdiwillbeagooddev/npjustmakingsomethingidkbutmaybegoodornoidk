@@ -1,3 +1,8 @@
+/*
+events = user join  | user leave | message delete | guil create
+modules = music | ....
+*/
+
 const init = async () => {
 
     const cmdFiles = await readdir('./commands/');
