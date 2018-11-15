@@ -3,6 +3,24 @@ events = user join  | user leave | message delete | guil create
 modules = music | ....
 */
 
+const Discord = require('discord.js');
+const { promisify } = require('util');
+const readdir = promisify(require('fs').readdir);
+const Enmap = require('enmap');
+const EnmapLevel = require('enmap-level');
+const YouTube = require('simple-youtube-api');
+const ytdl = require('ytdl-core');
+const client = new Discord.Client();
+
+try {
+    client.config = require('./config.js');
+} catch (err) {
+    console.error('Unable to load config.js \n', err);
+    process.exit(1);
+}
+
+client.commands = new Discord.Collection();
+
 const init = async () => {
 
     const cmdFiles = await readdir('./commands/');
@@ -20,16 +38,6 @@ const init = async () => {
         } catch (e) {
             client.log('ERROR', `Unable to load command ${f}: ${e}`);
         }
-    });
-
-    const evtFiles = await readdir('./events/');
-    client.log('log', `Loading a total of ${evtFiles.length} events.`, 'LOAD');
-    evtFiles.forEach(file => {
-        const eventName = file.split('.')[0];
-        client.log('log', `Loading Event: ${eventName}.`, 'LOAD');
-        const event = require(`./events/${file}`);
-        client.on(eventName, event.bind(null, client));
-        delete require.cache[require.resolve(`./events/${file}`)];
     });
 
     var token = client.config.token;
